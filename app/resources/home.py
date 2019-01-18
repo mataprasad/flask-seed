@@ -5,5 +5,5 @@ api = Namespace('home', description='Status related stuff')
 
 @api.route("/")
 class Home(Resource):
-    def get():
+    def get(self):
         return "home", 200
