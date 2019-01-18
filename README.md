@@ -16,3 +16,4 @@
 
 1) source .env
 2) ./run.sh
+3) Visit swagger at http://localhost:5000/v1/api/
