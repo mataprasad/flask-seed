@@ -7,7 +7,22 @@
 </head>
 
 <body>
-<h1>Hello</h1>
+    <h2>Employee Table</h2>
+
+    <table>
+      <tr>
+        <th>EMPNO</th>
+        <th>ENAME</th>
+        <th>JOB</th>
+      </tr>
+      {% for row in data %}
+      <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+      </tr>
+      {% endfor %}
+    </table>
 </body>
 
 </html>
