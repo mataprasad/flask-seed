@@ -1,4 +1,4 @@
-from core.util.db_util import connection_pool
+from core.util.db_util import getConnectionPool
 import mysql.connector
 from mysql.connector import Error
 from mysql.connector.connection import MySQLConnection
@@ -6,6 +6,7 @@ from mysql.connector import pooling
 
 def test():
     try:
+        connection_pool = getConnectionPool()
         print("Connection Pool Name - ", connection_pool.pool_name)
         connection_object = connection_pool.get_connection()
         print('connected',connection_object.is_connected())

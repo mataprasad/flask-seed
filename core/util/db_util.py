@@ -3,16 +3,19 @@ from mysql.connector import Error
 from mysql.connector.connection import MySQLConnection
 from mysql.connector import pooling
 
-connection_pool = mysql.connector.pooling.MySQLConnectionPool(pool_name="pynative_pool",
+def getConnectionPool():
+    connection_pool = mysql.connector.pooling.MySQLConnectionPool(pool_name="pynative_pool",
                                                             pool_size=5,
                                                             pool_reset_session=True,
                                                             host='localhost',
                                                             database='db-scott',
                                                             user='root',
                                                             password='root')
+    return connection_pool
 
 def __test_db_connection():
     try:
+        connection_pool = getConnectionPool()
         print ("Printing connection pool properties ")
         print("Connection Pool Name - ", connection_pool.pool_name)
         print("Connection Pool Size - ", connection_pool.pool_size)

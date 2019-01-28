@@ -20,7 +20,8 @@ def before_request():
 @flaskApp.after_request
 def after_request(response):
     print("after_request() called")
-    d = json.loads(response.get_data())
-    d['altered'] = 'this has been altered...GOOD!'
-    response.set_data(json.dumps(d))
+    if response.is_json:
+        d = json.loads(response.get_data())
+        d['altered'] = 'this has been altered...GOOD!'
+        response.set_data(json.dumps(d))
     return response
