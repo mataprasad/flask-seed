@@ -7,10 +7,9 @@ from core.views.ping import bp as ping_bp
 from core.resources.ping import bp as ping_json_bp
 from core.Api import bp as bp_api
 import logging
-import json
 
 class Application(Flask):
-    def __init__(self, import_name, *args, **kwargs):
+    def __init__(self, import_name, before_request_func = None, after_request_func = None, *args, **kwargs):
         super(Application, self).__init__(import_name, *args, **kwargs)
         self.register_blueprint(bp_api)
         self.register_blueprint(ping_bp)
@@ -26,12 +25,12 @@ class Application(Flask):
         @self.before_request
         def before_request():
             print("before_request() called 2")
+            if before_request_func is not None:
+                before_request_func()
 
         @self.after_request
         def after_request(response):
             print("after_request() called 3")
-            if response.is_json:
-                d = json.loads(response.get_data())
-                d['altered'] = 'this has been altered...GOOD!'
-                response.set_data(json.dumps(d))
+            if after_request_func is not None:
+                return after_request_func(response)
             return response
